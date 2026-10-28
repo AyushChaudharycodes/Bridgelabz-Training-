@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 6 — All HTML Solutions</title>
+</head>
+<body>
+  <!-- Assignment 6: All 20 solutions are included in this single HTML file.
+       The assignment asks for HTML only, without CSS or JavaScript.
+       Questions 3, 4, and 17 traditionally use multiple files/frames; simple
+       self-contained examples or data URLs are used here to keep everything
+       in one normal file as requested. -->
+
+  <h1>Assignment 6 — All Solutions in One File</h1>
+  <p>This file contains solutions for Questions 1–20. It uses HTML only.</p>
+  <hr>
+
+  <section id="q1">
+    <h2>1. Embed a YouTube Video Using an iframe</h2>
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"
+      title="Example YouTube video"
+      width="100%"
+      height="50%"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </section>
+  <hr>
+
+  <section id="q2">
+    <h2>2. Embed a Google Map</h2>
+    <!-- loading="lazy" asks the browser to defer loading the map until it is near the visible area. -->
+    <iframe
+      title="Map of Mathura"
+      src="https://maps.google.com/maps?q=Mathura%2C%20Uttar%20Pradesh%2C%20India&amp;output=embed"
+      width="100%"
+      height="350"
+      loading="lazy">
+    </iframe>
+  </section>
+  <hr>
+
+  <section id="q3">
+    <h2>3. Two iframes: Introduction and Favorite Hobby</h2>
+    <p>The two embedded documents below are provided as data URLs so this example remains in one HTML file.</p>
+    <h3>Introduction</h3>
+    <iframe title="Introduction page" width="100%" height="180"
+      srcdoc="<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Introduction</title></head><body><h1>About Me</h1><p>Hello! My name is Alex. I am a student who enjoys learning new things and building useful skills.</p></body></html>">
+    </iframe>
+    <h3>Favorite Hobby</h3>
+    <iframe title="Favorite hobby page" width="100%" height="180"
+      srcdoc="<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>My Hobby</title></head><body><h1>My Favorite Hobby</h1><p>My favorite hobby is photography. It helps me notice details, explore new places, and preserve memories.</p></body></html>">
+    </iframe>
+  </section>
+  <hr>
+
+  <section id="q4">
+    <h2>4. Frameset Layout (Legacy HTML)</h2>
+    <p><strong>Note:</strong> The <code>&lt;frameset&gt;</code> and <code>&lt;frame&gt;</code> elements are obsolete in HTML5. This equivalent layout is shown using iframe elements so it can be included in this single HTML5 file.</p>
+    <iframe title="Navigation frame" width="100%" height="80"
+      srcdoc="<!DOCTYPE html><html lang='en'><body><p><a href='#home'>Home</a> | <a href='#about'>About</a> | <a href='#contact'>Contact</a></p></body></html>">
+    </iframe>
+    <iframe title="Welcome message frame" width="100%" height="100"
+      srcdoc="<!DOCTYPE html><html lang='en'><body><h2>Welcome to My Website</h2></body></html>">
+    </iframe>
+  </section>
+  <hr>
+
+  <section id="q5">
+    <h2>5. Complete head Section and UTF-8 Text</h2>
+    <p>English: Hello, world! | Hindi: नमस्ते दुनिया! | Japanese: こんにちは世界！</p>
+  </section>
+  <hr>
+
+  <section id="q6">
+    <h2>6. User Registration Form</h2>
+    <form action="#" method="post">
+      <p><label for="reg-name">Full Name:</label><br><input type="text" id="reg-name" name="full_name" required></p>
+      <p><label for="reg-email">Email Address:</label><br><input type="email" id="reg-email" name="email" required></p>
+      <p><label for="reg-password">Password:</label><br><input type="password" id="reg-password" name="password" required></p>
+      <p><label for="reg-confirm">Confirm Password:</label><br><input type="password" id="reg-confirm" name="confirm_password" required></p>
+      <button type="submit">Register</button>
+    </form>
+  </section>
+  <hr>
+
+  <section id="q7">
+    <h2>7. Login Form with Hidden CSRF Token</h2>
+    <form action="#" method="post">
+      <p><label for="login-username">Username:</label><br><input type="text" id="login-username" name="username" required></p>
+      <p><label for="login-password">Password:</label><br><input type="password" id="login-password" name="password" required></p>
+      <!-- A CSRF token helps a server verify that a submitted request came from an authorized form/session. -->
+      <input type="hidden" name="csrf_token" value="dummy-csrf-token-12345">
+      <button type="submit">Log In</button>
+    </form>
+  </section>
+  <hr>
+
+  <section id="q8">
+    <h2>8. Feedback Form</h2>
+    <form method="post" action="#">
+      <p><label for="feedback-text">Your feedback:</label><br><textarea id="feedback-text" name="feedback" rows="5" cols="40"></textarea></p>
+      <p>Rating:</p>
+      <input type="radio" id="rating-good" name="rating" value="Good" required><label for="rating-good">Good</label><br>
+      <input type="radio" id="rating-average" name="rating" value="Average"><label for="rating-average">Average</label><br>
+      <input type="radio" id="rating-poor" name="rating" value="Poor"><label for="rating-poor">Poor</label><br><br>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </section>
+  <hr>
+
+  <section id="q9">
+    <h2>9. File Upload Form for JPG and PNG Images</h2>
+    <p>Choose an image file in JPG or PNG format only.</p>
+    <form action="#" method="post" enctype="multipart/form-data">
+      <label for="image-upload">Select image:</label>
+      <input type="file" id="image-upload" name="image" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required>
+      <button type="submit">Upload File</button>
+    </form>
+  </section>
+  <hr>
+
+  <section id="q10">
+    <h2>10. Contact Form</h2>
+    <form action="#" method="post">
+      <p><label for="contact-full-name">Full Name:</label><br><input type="text" id="contact-full-name" name="full_name" placeholder="Enter your full name" required></p>
+      <p><label for="contact-email">Email:</label><br><input type="email" id="contact-email" name="email" placeholder="Enter your email" required></p>
+      <p><label for="contact-subject">Subject:</label><br><input type="text" id="contact-subject" name="subject" placeholder="Enter subject" required></p>
+      <p><label for="contact-message">Message:</label><br><textarea id="contact-message" name="message" rows="5" cols="40" placeholder="Write your message" required></textarea></p>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+  <hr>
+
+  <section id="q11">
+    <h2>11. Student Information Form</h2>
+    <form action="#" method="post">
+      <p><label for="student-name">Name:</label><br><input type="text" id="student-name" name="student_name" required></p>
+      <p><label for="roll-number">Roll Number:</label><br><input type="text" id="roll-number" name="roll_number" required></p>
+      <p><label for="course">Course:</label><br>
+        <select id="course" name="course" required>
+          <option value="" selected disabled>Select Course</option>
+          <option value="BCA">BCA</option>
+          <option value="BSc">B.Sc.</option>
+          <option value="BCom">B.Com.</option>
+          <option value="BA">B.A.</option>
+          <option value="BTech">B.Tech.</option>
+        </select>
+      </p>
+      <button type="submit">Submit Student Details</button>
+    </form>
+  </section>
+  <hr>
+
+  <section id="q12">
+    <h2>12. HTML Entities</h2>
+    <p>Less than: &lt;</p>
+    <p>Greater than: &gt;</p>
+    <p>Ampersand: &amp;</p>
+    <p>Double quote: &quot;</p>
+    <p>Apostrophe: &apos;</p>
+    <p>Copyright: &copy; | Trademark: &trade; | Registered: &reg;</p>
+  </section>
+  <hr>
+
+  <section id="q13">
+    <h2>13. Text in Three Languages</h2>
+    <p>English: Welcome to my webpage.</p>
+    <p>Hindi: मेरी वेबपेज पर आपका स्वागत है।</p>
+    <p>French: Bienvenue sur ma page web.</p>
+  </section>
+  <hr>
+
+  <section id="q14">
+    <h2>14. Embed an External Website</h2>
+    <iframe title="Wikipedia website" src="https://www.wikipedia.org/" width="100%" height="350" loading="lazy"></iframe>
+    <p>Some websites may not allow embedding for security reasons.</p>
+  </section>
+  <hr>
+
+  <section id="q15">
+    <h2>15. Payment Form</h2>
+    <p>Example form only. Do not enter real payment details on this demonstration page.</p>
+    <form action="#" method="post">
+      <p><label for="cardholder">Cardholder Name:</label><br><input type="text" id="cardholder" name="cardholder" autocomplete="cc-name" required></p>
+      <p><label for="card-number">Card Number:</label><br><input type="text" id="card-number" name="card_number" inputmode="numeric" autocomplete="cc-number" required></p>
+      <p><label for="expiry-date">Expiry Date:</label><br><input type="month" id="expiry-date" name="expiry_date" autocomplete="cc-exp" required></p>
+      <p><label for="cvv">CVV:</label><br><input type="password" id="cvv" name="cvv" inputmode="numeric" autocomplete="cc-csc" required></p>
+      <button type="submit">Pay Now</button>
+    </form>
+  </section>
+  <hr>
+
+  <section id="q16">
+    <h2>16. URI Encoding</h2>
+    <p>Original query text: HTML &amp; CSS</p>
+    <p>Correct encoded URL:</p>
+    <p><a href="https://example.com/search?query=HTML%20%26%20CSS">https://example.com/search?query=HTML%20%26%20CSS</a></p>
+  </section>
+  <hr>
+
+  <section id="q17">
+    <h2>17. Form and Result in One HTML File</h2>
+    <p>The form below targets the result iframe. The result document is embedded in this file using srcdoc, keeping the deliverable as one file.</p>
+    <form action="#form-result" method="get" target="result-frame">
+      <label for="form-text">Enter text:</label>
+      <input type="text" id="form-text" name="message" required>
+      <button type="submit">Submit</button>
+    </form>
+    <iframe name="result-frame" title="Form result" width="100%" height="100"
+      srcdoc="<!DOCTYPE html><html lang='en'><body><p>Form successfully submitted.</p></body></html>">
+    </iframe>
+  </section>
+  <hr>
+
+  <section id="q18">
+    <h2>18. Long and Short Quotations</h2>
+    <p>The teacher said, <q>Always remember that 5 &lt; 10 and learning takes patience.</q></p>
+    <blockquote>
+      Learning is a continuous process. Ask questions, practise regularly, and use mistakes as opportunities to understand a subject more deeply. Knowledge grows when it is shared respectfully.
+    </blockquote>
+  </section>
+  <hr>
+
+  <section id="q19">
+    <h2>19. Form Security Attributes</h2>
+    <form action="#" method="post" autocomplete="off">
+      <p><label for="secure-username">Username:</label><br><input type="text" id="secure-username" name="username" required></p>
+      <p><label for="secure-email">Email:</label><br><input type="email" id="secure-email" name="email" required></p>
+      <p><label for="secure-password">Password:</label><br><input type="password" id="secure-password" name="password" required></p>
+      <button type="submit">Submit Secure Form</button>
+    </form>
+    <p>Note: Turning off autocomplete can reduce the browser's tendency to store or suggest previously entered values on shared devices. It is not a substitute for HTTPS, server-side validation, or secure authentication, and browsers may ignore this setting in some cases.</p>
+  </section>
+  <hr>
+
+  <section id="q20">
+    <h2>20. Important HTML Head Elements</h2>
+    <p>This page's head includes examples of title, meta, base, link, style, and script elements. The style and script elements are empty, as allowed by the assignment.</p>
+    <!-- <title> sets the page title shown in the browser tab. -->
+    <!-- <meta charset> declares the document's character encoding. -->
+    <!-- <meta name="description"> gives a short page summary for search engines. -->
+    <!-- <meta name="author"> identifies the page author. -->
+    <!-- <base> defines the base URL for relative links; it is demonstrated here in a comment because it affects all relative URLs. -->
+    <!-- <link> connects an external resource, such as a favicon. -->
+    <!-- <style> holds CSS rules; this assignment example leaves it empty. -->
+    <!-- <script> holds or references JavaScript; this assignment example leaves it empty. -->
+    <p>See the source code of this file for the requested head elements and comments explaining their purpose.</p>
+  </section>
+</body>
+</html>
