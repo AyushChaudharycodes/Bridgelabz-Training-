@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment 8 — All CSS Solutions</title>
+<style>
+*{box-sizing:border-box}
+:root{--navy:#18243c;--blue:#3157d5;--ink:#26334b;--muted:#5c6980;--line:#dbe2ee}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#f3f6fc;line-height:1.6}
+.site-header{background:var(--navy);color:#fff;padding:26px 5%}
+.site-header h1{margin:0 0 5px;font-size:clamp(1.7rem,4vw,2.5rem)}
+.site-header p{margin:0;color:#dce5ff}
+main{width:min(1150px,92%);margin:28px auto 48px}
+.contents{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:25px}
+.contents a{background:#e6ecff;border:1px solid #cbd7ff;color:#2444aa;padding:6px 11px;border-radius:20px;text-decoration:none;font-size:.9rem}
+.solution{background:#fff;border:1px solid var(--line);border-radius:15px;padding:23px;margin-bottom:23px;box-shadow:0 5px 17px rgba(24,36,60,.05)}
+.solution h2{margin:0 0 8px;line-height:1.3}
+.intro{margin:0 0 17px;color:var(--muted)}
+.demo{background:#f8faff;border:1px dashed #cbd5e5;border-radius:12px;padding:18px}
+.note{font-size:.92rem;color:var(--muted)}
+.site-footer{background:var(--navy);color:#e5ebff;text-align:center;padding:18px}
+/* 1. Pseudo-classes */
+.pseudo-row{display:flex;flex-wrap:wrap;justify-content:center;gap:15px}
+.pseudo-example{flex:1 1 190px;background:white;padding:15px;border:1px solid var(--line);border-radius:10px}
+.pseudo-example a{color:#3157d5;transition:color .25s ease}.pseudo-example a:hover{color:#d34b54}
+.pseudo-example button{padding:8px 12px;border:0;border-radius:7px;color:white;background:#3157d5;cursor:pointer}
+.pseudo-example button:active{background:#18328d;transform:scale(.96)}
+.pseudo-example input:focus{outline:3px solid #b7c8ff;border-color:#3157d5}
+.pseudo-example li:nth-child(odd){background:#e6ecff}.pseudo-example li{padding:4px 7px;margin:3px 0;border-radius:5px}
+/* 2. CSS-only tooltips */
+.tooltip-row{min-height:180px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:45px}
+.tooltip{position:relative;display:inline-block;padding:12px 16px;background:#e6ecff;color:#2444aa;border-radius:9px;font-weight:bold;cursor:help}
+.tooltip-text{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);width:max-content;max-width:220px;padding:8px 11px;border-radius:7px;background:#18243c;color:white;text-align:center;font-size:.85rem;font-weight:normal;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease-in-out,visibility .3s ease-in-out;z-index:3}
+.tooltip-text:after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#18243c}
+.tooltip:hover .tooltip-text,.tooltip:focus .tooltip-text{opacity:1;visibility:visible}
+/* 3. Image showcase: CSS illustrations keep this a standalone file */
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.gallery figure{position:relative;overflow:hidden;margin:0;background:#fff;border-radius:12px;box-shadow:0 7px 18px rgba(24,36,60,.13)}
+.gallery .art{height:170px;display:grid;place-items:center;font-size:3.3rem;transition:transform .3s ease}
+.gallery figure:after{content:"";position:absolute;inset:0 0 42px;background:rgba(0,0,0,0);transition:background .3s ease;pointer-events:none}
+.gallery figure:hover .art{transform:scale(1.1)}.gallery figure:hover:after{background:rgba(0,0,0,.22)}
+.gallery figcaption{position:relative;z-index:1;padding:10px 12px;text-align:center;font-weight:bold;background:white}
+.art.one{background:linear-gradient(135deg,#b8d9ff,#e2caff)}.art.two{background:linear-gradient(135deg,#ffe1ae,#ffc3c9)}.art.three{background:linear-gradient(135deg,#b7f0db,#c8d5ff)}.art.four{background:linear-gradient(135deg,#d7c6ff,#f5d0e8)}.art.five{background:linear-gradient(135deg,#c7e7f5,#b8f0d2)}.art.six{background:linear-gradient(135deg,#ffe7a9,#ffc7a8)}
+/* 4. Selectors */
+.selector-demo p{margin:10px 0;padding:8px}
+.selector-demo .class-example{background:#e8efff;border-left:4px solid #3157d5}
+#id-example{color:#7a3d9a;font-weight:bold}
+.selector-demo input[type="text"]{border:2px solid #b6c3d8;padding:8px;border-radius:6px}
+.selector-demo .parent>p{background:#e1f5eb} /* Child combinator */
+.selector-demo h4+p{border-left:3px solid #e6a23c} /* Adjacent sibling */
+.selector-demo h4~p{font-style:italic} /* General sibling */
+.selector-demo .nested p{background:#fff1d9} /* Descendant combinator */
+/* 5. Styled buttons */
+.button-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px}
+.btn{padding:11px 19px;border-radius:9px;font:inherit;font-weight:bold;border:2px solid transparent;cursor:pointer;box-shadow:0 4px 10px rgba(24,36,60,.12);transition:all .25s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 15px rgba(24,36,60,.18)}.btn:active{transform:scale(.97)}
+.btn:focus{outline:3px solid #b7c8ff;outline-offset:3px}
+.btn.primary{background:#3157d5;color:white}.btn.secondary{background:#e6ecff;color:#2444aa}.btn.outline{background:white;border-color:#3157d5;color:#3157d5}
+.btn:disabled{background:#d5dbe6;color:#7a8496;box-shadow:none;cursor:not-allowed;transform:none}
+/* 6. Animations */
+.animation-stage{min-height:230px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:45px;overflow:hidden}
+.moving-box{width:65px;height:65px;background:#3157d5;border-radius:12px;animation:slide 3s ease-in-out infinite alternate}
+.bouncing-ball{width:55px;height:55px;background:#f2a84b;border-radius:50%;animation:bounce 1.2s ease-in-out infinite alternate}
+.color-text{font-size:1.35rem;font-weight:bold;animation:colorShift 3s ease-in-out .4s infinite alternate}
+@keyframes slide{from{transform:translateX(-25px) rotate(0)}to{transform:translateX(25px) rotate(25deg)}}
+@keyframes bounce{from{transform:translateY(-30px)}to{transform:translateY(30px)}}
+@keyframes colorShift{0%{color:#3157d5}50%{color:#d34b54}100%{color:#21845e}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* 7. UI components */
+.ui-card{max-width:650px;margin:auto;display:flex;flex-direction:column;gap:15px;padding:22px;border-radius:14px;background:linear-gradient(135deg,#f0f4ff,#fff5f1);box-shadow:0 8px 22px rgba(24,36,60,.12)}
+.ui-search{display:flex;gap:8px}
+.ui-card input,.ui-card select{min-width:0;width:100%;padding:11px 12px;border:1px solid #bac5d9;border-radius:8px;font:inherit;background:white}
+.ui-card input:focus,.ui-card select:focus{outline:3px solid #bdccff;border-color:#3157d5}
+.ui-card button{padding:10px 16px;border:0;border-radius:8px;color:white;background:#3157d5;font:inherit;cursor:pointer;transition:background .25s ease}
+.ui-card button:hover{background:#203fa8}.ui-actions{display:flex;flex-wrap:wrap;gap:10px}
+/* 8. Box sizing comparison */
+.sizing-row{display:flex;justify-content:center;align-items:stretch;gap:22px;flex-wrap:wrap}
+.sizing-card{width:260px;padding:20px;border:8px solid #3157d5;border-radius:10px;background:#dce6ff}
+.sizing-card.content-sizing{box-sizing:content-box;background:#ffe2c4;border-color:#bf6a2c}
+.sizing-card.border-sizing{box-sizing:border-box;background:#d8f3e7;border-color:#26835f}
+/* 9. Combined effects */
+.effects-row{display:flex;flex-wrap:wrap;justify-content:space-evenly;align-items:center;gap:18px}
+.effect-tile{flex:1 1 150px;text-align:center;background:white;border:1px solid var(--line);padding:22px 12px;border-radius:12px;transition:all .3s ease;box-shadow:0 3px 8px rgba(24,36,60,.07)}
+.effect-tile:hover,.effect-tile:focus{transform:translateY(-5px) scale(1.03);background:#eaf0ff;box-shadow:0 12px 22px rgba(49,87,213,.2)}
+.effect-tile:active{transform:scale(.98)}
+/* 10. Mini UI */
+.mini-layout{max-width:740px;margin:auto;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:#fff;box-shadow:0 10px 28px rgba(24,36,60,.12)}
+.mini-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:16px 20px;color:white;background:#18243c}
+.mini-header strong{font-size:1.1rem}.mini-header a{color:#e0e8ff;text-decoration:none}
+.mini-main{display:flex;justify-content:center;align-items:center;padding:25px}
+.mini-card{width:min(100%,510px);border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:0 5px 15px rgba(24,36,60,.08)}
+.mini-image{display:grid;place-items:center;height:115px;margin-bottom:15px;border-radius:9px;background:linear-gradient(135deg,#bddcff,#e5ccff);font-size:2.7rem}
+.mini-card form{display:flex;flex-direction:column;gap:12px}
+.mini-card input,.mini-card textarea{width:100%;padding:10px;font:inherit;border:1px solid #bdc8d9;border-radius:7px}
+.mini-card input:focus,.mini-card textarea:focus{outline:3px solid #bdccff;border-color:#3157d5}
+.mini-card textarea{min-height:75px}.mini-card button{align-self:flex-start;padding:10px 16px;border:0;border-radius:7px;color:white;background:#3157d5;cursor:pointer;transition:all .25s ease}
+.mini-card button:hover{background:#203fa8;transform:translateY(-2px)}
+.mini-footer{text-align:center;padding:13px;color:#e5ebff;background:#18243c}
+@media(max-width:700px){.gallery{grid-template-columns:1fr}.gallery .art{height:190px}.solution{padding:17px}.ui-search{flex-direction:column}.mini-header{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<header class="site-header"><h1>Assignment 8 — All CSS Solutions</h1><p>Ten demonstrations built with semantic HTML5 and CSS only. No JavaScript or external CSS frameworks.</p></header>
+<main>
+<nav class="contents" aria-label="Assignment contents">
+<a href="#q1">1. Pseudo-Classes</a><a href="#q2">2. Tooltips</a><a href="#q3">3. Image Showcase</a><a href="#q4">4. Selectors</a><a href="#q5">5. Buttons</a><a href="#q6">6. Animations</a><a href="#q7">7. UI Components</a><a href="#q8">8. Box Sizing</a><a href="#q9">9. Combined Effects</a><a href="#q10">10. Mini UI</a>
+</nav>
+<section class="solution" id="q1">
+<h2>1. Webpage Demonstrating Pseudo-Classes</h2><p class="intro">Hover the link, focus the input, press the button, and compare list items.</p>
+<div class="demo pseudo-row">
+<div class="pseudo-example"><strong>:hover</strong><p><a href="#q1">Hover over this link</a></p><span class="note">The link color changes.</span></div>
+<div class="pseudo-example"><strong>:focus</strong><p><input type="text" placeholder="Focus this input" aria-label="Focus example"></p><span class="note">The field gets an outline.</span></div>
+<div class="pseudo-example"><strong>:active</strong><p><button type="button">Press and hold</button></p><span class="note">The button changes while pressed.</span></div>
+<div class="pseudo-example"><strong>:nth-child(odd)</strong><ul><li>First item</li><li>Second item</li><li>Third item</li></ul><span class="note">Odd items have a background.</span></div>
+</div></section>
+<section class="solution" id="q2">
+<h2>2. Tooltip Demonstration Page</h2><p class="intro">Hover or keyboard-focus each item to show a CSS-only tooltip.</p>
+<div class="demo tooltip-row">
+<span class="tooltip" tabindex="0">Info<span class="tooltip-text">Extra information appears above this word.</span></span>
+<span class="tooltip" tabindex="0">Help<span class="tooltip-text">This tooltip fades in smoothly.</span></span>
+<span class="tooltip" tabindex="0">CSS<span class="tooltip-text">No JavaScript is used.</span></span>
+<span class="tooltip" tabindex="0">★<span class="tooltip-text">A tooltip attached to an icon.</span></span>
+</div></section>
+<section class="solution" id="q3">
+<h2>3. Image Showcase Layout</h2><p class="intro">Six self-contained CSS illustration panels scale and darken on hover, with captions below.</p>
+<div class="gallery">
+<figure><div class="art one" role="img" aria-label="Mountain illustration">🏔️</div><figcaption>Mountain Escape</figcaption></figure>
+<figure><div class="art two" role="img" aria-label="Sunrise illustration">🌅</div><figcaption>Golden Sunrise</figcaption></figure>
+<figure><div class="art three" role="img" aria-label="Leaf illustration">🌿</div><figcaption>Fresh Nature</figcaption></figure>
+<figure><div class="art four" role="img" aria-label="Flower illustration">🌸</div><figcaption>Spring Blossom</figcaption></figure>
+<figure><div class="art five" role="img" aria-label="Ocean illustration">🌊</div><figcaption>Ocean Breeze</figcaption></figure>
+<figure><div class="art six" role="img" aria-label="Star illustration">✨</div><figcaption>Evening Glow</figcaption></figure>
+</div></section>
+<section class="solution" id="q4">
+<h2>4. CSS Selectors Practice Page</h2><p class="intro">Examples show element, class, ID, attribute, and combinator selectors; comments explain key rules.</p>
+<div class="demo selector-demo">
+<p>Element selector: paragraphs receive spacing.</p><p class="class-example">Class selector: this paragraph uses .class-example.</p><p id="id-example">ID selector: this paragraph uses #id-example.</p>
+<label for="selector-input">Attribute selector [type="text"]:</label><br><input id="selector-input" type="text" placeholder="Text input example">
+<div class="parent"><p>Direct child selected with &gt;.</p><div><p>Nested paragraph is not a direct child.</p></div></div>
+<h4>Sibling combinator examples</h4><p>Adjacent sibling selected with +.</p><p>General sibling selected with ~.</p><div class="nested"><p>Descendant paragraph selected with a space.</p></div>
+<p>Link attribute example: <a href="https://example.com">HTTPS link</a></p>
+</div></section>
+<section class="solution" id="q5">
+<h2>5. Styled Button Collection</h2><p class="intro">Primary, secondary, outline, and disabled buttons demonstrate hover, active, focus, and disabled states.</p>
+<div class="demo button-row"><button class="btn primary" type="button">Primary</button><button class="btn secondary" type="button">Secondary</button><button class="btn outline" type="button">Outline</button><button class="btn" type="button" disabled>Disabled</button></div>
+<p class="note">Use Tab to focus a button, hover to lift it, and press a button to see the active effect.</p>
+</section>
+<section class="solution" id="q6">
+<h2>6. CSS Animation Demonstration Page</h2><p class="intro">Three @keyframes animations use ease-in-out timing, delay, infinite iteration, and alternate direction.</p>
+<div class="demo animation-stage"><div><div class="moving-box" aria-label="Moving rotating box"></div><p class="note">Moving box · alternate direction</p></div><div><div class="bouncing-ball" aria-label="Bouncing ball"></div><p class="note">Bouncing ball · infinite loop</p></div><div><p class="color-text">Color changing text</p><p class="note">Delayed color animation</p></div></div>
+</section>
+<section class="solution" id="q7">
+<h2>7. User Interface Components Page</h2><p class="intro">A card interface combines a search field, buttons, and dropdown with a soft gradient background.</p>
+<div class="demo"><div class="ui-card"><h3 style="margin:0">Explore Resources</h3><form action="#" method="get"><label for="search-field">Search</label><div class="ui-search"><input id="search-field" name="q" type="search" placeholder="Search topics..."><button type="submit">Search</button></div><label for="category">Choose a category</label><select id="category" name="category"><option>Web Design</option><option>CSS Basics</option><option>Accessibility</option></select></form><div class="ui-actions"><button type="button">Get Started</button><button type="button">Learn More</button></div></div></div>
+</section>
+<section class="solution" id="q8">
+<h2>8. Box-Sizing Comparison Page</h2><p class="intro">Both boxes declare 260px width and equal padding. content-box adds padding and borders outside that width; border-box includes them.</p>
+<div class="demo sizing-row"><article class="sizing-card content-sizing"><h3>content-box</h3><p>The declared width applies to content only. Total width is 260px plus left/right padding and borders.</p></article><article class="sizing-card border-sizing"><h3>border-box</h3><p>The declared width includes content, padding, and borders, so total width remains 260px.</p></article></div>
+</section>
+<section class="solution" id="q9">
+<h2>9. Combined Effects Demonstration</h2><p class="intro">Each tile combines pseudo-classes, transitions, transformations, and shadows.</p>
+<div class="demo effects-row"><div class="effect-tile" tabindex="0"><strong>Grow</strong><p class="note">Hover to scale and lift.</p></div><div class="effect-tile" tabindex="0"><strong>Color</strong><p class="note">Background changes on hover.</p></div><div class="effect-tile" tabindex="0"><strong>Shadow</strong><p class="note">Shadow grows smoothly.</p></div></div>
+</section>
+<section class="solution" id="q10">
+<h2>10. Complete Mini User Interface Layout</h2><p class="intro">A compact responsive layout includes a header, main card, image-style panel, form, buttons, and footer.</p>
+<div class="mini-layout"><header class="mini-header"><strong>SimpleSpace</strong><nav aria-label="Mini UI navigation"><a href="#q10">Home</a> &nbsp; <a href="#q7">Features</a></nav></header><div class="mini-main"><section class="mini-card"><div class="mini-image" role="img" aria-label="Abstract landscape illustration">🌄</div><h3>Contact Our Team</h3><p class="note">Send a short message using the form below.</p><form action="#" method="get"><label for="mini-name">Name</label><input id="mini-name" name="name" type="text" placeholder="Your name"><label for="mini-email">Email</label><input id="mini-email" name="email" type="email" placeholder="you@example.com"><label for="mini-message">Message</label><textarea id="mini-message" name="message" placeholder="How can we help?"></textarea><button type="submit">Send Message</button></form></section></div><footer class="mini-footer">© 2026 SimpleSpace · Built with HTML and CSS</footer></div>
+</section>
+</main>
+<footer class="site-footer">Assignment 8 • HTML5 and CSS only</footer>
+</body>
+</html>
