@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment 7 — CSS Practice Solutions</title>
+<style>
+/* ---------- Global styles ---------- */
+:root { --ink:#243047; --muted:#5d6b82; --paper:#f4f7fb; --blue:#3157d5; --line:#d8e0ed; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--ink); background:var(--paper); line-height:1.6; }
+header.site-header { background:#17233d; color:#fff; padding:28px 5vw; }
+.site-header h1 { margin:0 0 6px; font-size:clamp(1.7rem,4vw,2.5rem); }
+.site-header p { margin:0; color:#dce5ff; }
+main { width:min(1180px, 92%); margin:28px auto 50px; }
+nav.contents { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 28px; }
+nav.contents a { text-decoration:none; color:#2444aa; background:#e6ecff; border:1px solid #ccd7ff; border-radius:20px; padding:6px 12px; font-size:.9rem; }
+.solution { background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px; margin:0 0 24px; box-shadow:0 5px 18px rgba(26,42,75,.05); }
+.solution h2 { margin:0 0 8px; line-height:1.25; }
+.solution .intro { color:var(--muted); margin:0 0 18px; }
+.demo { background:#f8faff; border:1px dashed #cbd5e5; border-radius:12px; padding:18px; }
+.note { color:var(--muted); font-size:.92rem; }
+footer.site-footer { background:#17233d; color:#e3eaff; text-align:center; padding:20px; }
+
+/* 1. Borders and padding */
+.border-row { display:flex; flex-wrap:wrap; gap:14px; align-items:stretch; }
+.border-box { flex:1 1 150px; min-height:110px; background:#fff; border:4px solid #4c6fff; padding:12px; border-radius:0; transition:border-color .3s ease; }
+.border-box:hover { border-color:#f06449; }
+.border-box.dashed { border-style:dashed; padding:20px; }
+.border-box.double { border-style:double; border-width:7px; padding:16px; }
+.border-box.groove { border-style:groove; border-color:#8a70d6; border-radius:16px; padding:24px; }
+
+/* 2. Height and width */
+.size-demo { min-height:320px; display:flex; justify-content:center; align-items:center; gap:18px; flex-wrap:wrap; background:#edf2ff; padding:18px; }
+.size-box { display:flex; justify-content:center; align-items:center; text-align:center; padding:12px; border-radius:12px; color:#17233d; }
+.size-box.one { width:150px; height:100px; background:#ffd7a8; }
+.size-box.two { width:35%; min-width:150px; max-width:260px; height:13em; background:#bdebdc; overflow:auto; }
+.size-box.three { width:25vw; min-width:145px; height:18vh; min-height:90px; max-height:150px; background:#d8d1ff; }
+
+/* 3. Gradients, fixed header/footer */
+.gradient-demo { min-height:420px; overflow:hidden; border-radius:12px; }
+.gradient-demo .gradient-head { position:sticky; top:0; z-index:1; padding:12px 18px; color:white; background:#202b47; }
+.gradient-sections { padding:18px; background:#fff; }
+.linear-panel, .radial-panel { min-height:120px; padding:22px; margin:0 0 14px; border-radius:10px; color:#13203b; }
+.linear-panel { background:linear-gradient(115deg,#a8d8ff,#d9c7ff,#ffd7b0); background-attachment:fixed; }
+.radial-panel { background:radial-gradient(circle at center,#fff2a8 0%,#ffa8a8 45%,#d9c7ff 100%); }
+.gradient-foot { text-align:center; padding:10px; color:white; background:#202b47; }
+
+/* 4. Shadows and depth */
+.card-row { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.profile-card { background:white; border-radius:14px; padding:22px; min-height:160px; transition:all .3s ease; }
+.profile-card h3 { margin-top:0; text-shadow:2px 2px 3px #cbd5e5; }
+.profile-card.shadow-one { box-shadow:5px 5px 12px rgba(20,35,65,.18); }
+.profile-card.shadow-two { box-shadow:0 10px 25px rgba(49,87,213,.2); }
+.profile-card.shadow-three { box-shadow:inset 0 0 0 2px #d9dfff, 0 7px 0 #c5d0f0; }
+.profile-card:hover { transform:translateY(-7px); box-shadow:0 18px 30px rgba(20,35,65,.23); }
+
+/* 5. Advanced selectors */
+.selector-demo ul { padding-left:22px; }
+.selector-demo li { padding:7px 10px; border-radius:6px; }
+.selector-demo li:nth-child(odd) { background:#edf2ff; } /* Pseudo-class: every odd list item */
+.selector-demo li:hover { color:#173eb8; } /* Pseudo-class: hover */
+.selector-demo input[type="text"] { border:2px solid #aab7d0; padding:9px; border-radius:7px; } /* Attribute selector */
+.selector-demo input[type="text"]:focus { outline:3px solid #c7d4ff; } /* Focus pseudo-class */
+.selector-demo a[href^="https"] { color:#2057b9; font-weight:bold; } /* Attribute selector: href starts with https */
+.selector-demo .parent > p { border-left:4px solid #3157d5; padding-left:10px; } /* Child combinator */
+.selector-demo h4 + p { color:#8a3e80; } /* Adjacent sibling combinator */
+.selector-demo h4 ~ p { font-style:italic; } /* General sibling combinator */
+.selector-demo .descendant p { background:#fff4df; padding:7px; } /* Descendant combinator */
+.selector-demo .tag::before { content:"★ "; color:#e39b16; } /* Before pseudo-element */
+.selector-demo .tag::after { content:" ✓"; color:#16845b; } /* After pseudo-element */
+
+/* 6. Transformations */
+.transform-row { display:flex; justify-content:space-around; align-items:flex-start; gap:18px; flex-wrap:wrap; padding:20px 8px; }
+.transform-item { flex:1 1 120px; text-align:center; }
+.transform-box { display:grid; place-items:center; height:100px; max-width:170px; margin:0 auto 14px; border-radius:12px; color:#17233d; font-weight:bold; background:#cddaff; border:2px solid #8aa4ff; transition:all 0.4s ease; }
+.transform-box.rotate:hover { transform:rotate(12deg); }
+.transform-box.scale:hover { transform:scale(1.12); }
+.transform-box.translate:hover { transform:translate(10px,-8px); }
+.transform-box.skew:hover { transform:skew(-8deg,4deg); }
+
+/* 7. Typography */
+.article { max-width:760px; margin:auto; padding:22px; background:#fff; border-left:5px solid #3157d5; }
+.article h3 { font-family:Georgia,serif; font-size:2rem; letter-spacing:1px; line-height:1.2; }
+.article p { line-height:1.9; text-align:justify; letter-spacing:.2px; }
+.article .lead::first-letter { float:left; font-family:Georgia,serif; font-size:3.2rem; line-height:.9; padding:5px 8px 0 0; color:#3157d5; }
+.article .lead::first-line { font-weight:700; }
+.article mark { background:#fff0a8; color:#594300; padding:1px 4px; }
+.article strong { color:#b23b45; }
+.article em { color:#246b55; }
+
+/* 8. Box model */
+.box-model-layout { display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:28px; }
+.margin-layer { background:#f8d9b7; outline:2px dashed #b66b26; padding:26px; text-align:center; }
+.border-layer { background:#d7c8ff; border:9px solid #7558b8; padding:18px; }
+.padding-layer { background:#bfe9d8; padding:20px; }
+.content-layer { background:#fff; border:1px solid #8ab9a5; padding:18px; min-width:130px; }
+.sizing-pair { display:flex; flex-wrap:wrap; gap:16px; margin-top:18px; }
+.sizing-box { width:220px; padding:18px; border:8px solid #3157d5; background:#dce5ff; }
+.sizing-box.content-box { box-sizing:content-box; }
+.sizing-box.border-box { box-sizing:border-box; background:#d8f3e7; border-color:#26835f; }
+
+/* 9. Outline and focus form */
+.practice-form { display:grid; grid-template-columns:1fr; gap:14px; max-width:620px; margin:auto; }
+.practice-form label { display:grid; gap:5px; font-weight:700; }
+.practice-form input, .practice-form textarea { width:100%; font:inherit; padding:11px 12px; border:1px solid #b7c3d6; border-radius:8px; box-shadow:0 2px 6px rgba(20,35,65,.06); }
+.practice-form input.outline-dotted { outline:2px dotted #9b6bd3; outline-offset:3px; }
+.practice-form input:focus, .practice-form textarea:focus { outline:3px solid #7192ff; outline-offset:2px; border-color:#3157d5; }
+.practice-form textarea { min-height:100px; resize:vertical; }
+.practice-form button { justify-self:start; border:0; border-radius:8px; padding:10px 18px; background:#3157d5; color:white; font:inherit; cursor:pointer; }
+
+/* 10. Navigation */
+.demo-navbar { display:flex; gap:6px; flex-wrap:wrap; background:#17233d; padding:10px; border-radius:10px; }
+.demo-navbar a { color:white; text-decoration:none; padding:10px 16px; border:1px solid transparent; border-radius:7px; transition:all 0.3s ease; }
+.demo-navbar a:hover { background:#32466f; border-color:#8197c7; }
+.demo-navbar a.active { background:#f4c95d; color:#17233d; font-weight:bold; }
+.nav-footer { text-align:center; margin-top:14px; padding:12px; background:#e8edfa; border-radius:8px; }
+
+@media (max-width:700px) {
+  .card-row { grid-template-columns:1fr; }
+  .demo-navbar { flex-direction:column; }
+  .demo-navbar a { text-align:center; }
+  .solution { padding:18px; }
+  .size-box.three { width:70%; height:120px; }
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <h1>Assignment 7 — CSS Practice Solutions</h1>
+  <p>Ten self-contained demonstrations using semantic HTML5 and CSS only. No JavaScript or external frameworks.</p>
+</header>
+<main>
+<nav class="contents" aria-label="Assignment sections">
+  <a href="#q1">1. Borders</a><a href="#q2">2. Height &amp; Width</a><a href="#q3">3. Gradients</a>
+  <a href="#q4">4. Shadows</a><a href="#q5">5. Selectors</a><a href="#q6">6. Transforms</a>
+  <a href="#q7">7. Typography</a><a href="#q8">8. Box Model</a><a href="#q9">9. Focus Form</a><a href="#q10">10. Navbar</a>
+</nav>
+
+<section class="solution" id="q1">
+  <h2>1. Borders and Padding Demonstration</h2>
+  <p class="intro">Compare border styles, rounded corners, padding, and the smooth hover border-color change.</p>
+  <div class="demo border-row">
+    <div class="border-box"><strong>Solid border</strong><br><span class="note">Padding: 12px</span></div>
+    <div class="border-box dashed"><strong>Dashed border</strong><br><span class="note">Padding: 20px</span></div>
+    <div class="border-box double"><strong>Double border</strong><br><span class="note">Padding: 16px</span></div>
+    <div class="border-box groove"><strong>Groove border</strong><br><span class="note">Rounded corners</span></div>
+  </div>
+</section>
+
+<section class="solution" id="q2">
+  <h2>2. Height and Width Practice Layout</h2>
+  <p class="intro">The boxes use px, %, em, vw, and vh units, with min-height, max-width, and overflow examples.</p>
+  <div class="demo size-demo">
+    <div class="size-box one">150px wide<br>100px high</div>
+    <div class="size-box two">35% width<br>13em high<br><small>Overflow content demonstrates scrolling when needed. Add more content to test.</small></div>
+    <div class="size-box three">25vw wide<br>18vh high</div>
+  </div>
+</section>
+
+<section class="solution" id="q3">
+  <h2>3. Gradient Background Webpage</h2>
+  <p class="intro">A sticky header and footer frame linear and radial gradient sections. The linear section uses background-attachment: fixed.</p>
+  <div class="gradient-demo">
+    <div class="gradient-head"><strong>Gradient Showcase Header</strong></div>
+    <div class="gradient-sections">
+      <section class="linear-panel"><h3>Linear Gradient</h3><p>Color transitions move along a straight line across this panel.</p></section>
+      <section class="radial-panel"><h3>Radial Gradient</h3><p>Colors radiate outward from a central point.</p></section>
+    </div>
+    <div class="gradient-foot">Gradient Showcase Footer</div>
+  </div>
+</section>
+
+<section class="solution" id="q4">
+  <h2>4. Shadows and Depth Effect Layout</h2>
+  <p class="intro">Each card uses a different shadow. Hover over a card to lift it with a larger shadow; headings use text-shadow.</p>
+  <div class="card-row">
+    <article class="profile-card shadow-one"><h3>Alex Morgan</h3><p>Soft offset shadow for a simple raised-card effect.</p></article>
+    <article class="profile-card shadow-two"><h3>Jordan Lee</h3><p>Wide, blurred blue shadow creates a gentle glow.</p></article>
+    <article class="profile-card shadow-three"><h3>Sam Taylor</h3><p>An inset outline and lower shadow create layered depth.</p></article>
+  </div>
+</section>
+
+<section class="solution" id="q5">
+  <h2>5. Advanced CSS Selectors</h2>
+  <p class="intro">Examples include attribute selectors, pseudo-classes, pseudo-elements, and child/sibling/descendant combinators.</p>
+  <div class="demo selector-demo">
+    <label for="sample-text">Text input ([type="text"]):</label>
+    <input id="sample-text" type="text" placeholder="Click here to test :focus">
+    <p>Secure-style link: <a href="https://example.com">Example HTTPS link</a></p>
+    <ul><li>First item (:nth-child)</li><li>Second item (:hover)</li><li>Third item</li></ul>
+    <div class="parent"><p>Direct child paragraph styled with the &gt; combinator.</p><div><p>This nested paragraph is not a direct child.</p></div></div>
+    <h4>Heading for sibling examples</h4><p>Adjacent sibling paragraph (+).</p><p>General sibling paragraph (~).</p>
+    <div class="descendant"><p>Descendant paragraph styled by a space combinator.</p></div>
+    <p class="tag">Pseudo-element example</p>
+  </div>
+  <p class="note">CSS comments next to the rules identify the selector type used.</p>
+</section>
+
+<section class="solution" id="q6">
+  <h2>6. CSS Transformations Showcase</h2>
+  <p class="intro">Hover over each box to activate its transform. Each uses transition: all 0.4s ease.</p>
+  <div class="demo transform-row">
+    <div class="transform-item"><div class="transform-box rotate">Rotate</div><strong>rotate()</strong><p class="note">Turns the box</p></div>
+    <div class="transform-item"><div class="transform-box scale">Scale</div><strong>scale()</strong><p class="note">Changes its size</p></div>
+    <div class="transform-item"><div class="transform-box translate">Translate</div><strong>translate()</strong><p class="note">Moves its position</p></div>
+    <div class="transform-item"><div class="transform-box skew">Skew</div><strong>skew()</strong><p class="note">Slants the box</p></div>
+  </div>
+</section>
+
+<section class="solution" id="q7">
+  <h2>7. Typography and Text Styling</h2>
+  <p class="intro">This short article demonstrates font families, weights, sizes, spacing, alignment, and styled inline elements.</p>
+  <article class="article">
+    <h3>The Art of Clear Communication</h3>
+    <p class="lead">Good typography makes information easier to understand. Font family, size, and weight help readers recognize headings and body text quickly.</p>
+    <p>Readable paragraphs benefit from comfortable <mark>line spacing</mark> and carefully chosen letter spacing. Use <strong>strong emphasis</strong> for important ideas and <em>emphasis</em> to add nuance without overwhelming the reader.</p>
+    <p style="font-family:Georgia,serif;font-size:1.08rem;">A serif typeface can create an editorial feeling, while a sans-serif typeface often feels clean and modern.</p>
+  </article>
+</section>
+
+<section class="solution" id="q8">
+  <h2>8. Box Model Exploration</h2>
+  <p class="intro">The layered demonstration labels margin, border, padding, and content. Compare content-box and border-box sizing below.</p>
+  <div class="demo">
+    <div class="box-model-layout">
+      <div class="margin-layer">Margin
+        <div class="border-layer">Border
+          <div class="padding-layer">Padding
+            <div class="content-layer">Content<br><small>Text or image</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sizing-pair">
+      <div class="sizing-box content-box"><strong>content-box</strong><br>220px content width, plus padding and border.</div>
+      <div class="sizing-box border-box"><strong>border-box</strong><br>220px total width, including padding and border.</div>
+    </div>
+  </div>
+</section>
+
+<section class="solution" id="q9">
+  <h2>9. Outline and Focus Styling Form</h2>
+  <p class="intro">Try focusing the first field and the other controls. The first input also demonstrates outline-style and outline-offset.</p>
+  <div class="demo">
+    <form class="practice-form" action="#" method="get">
+      <label for="full-name">Name
+        <input class="outline-dotted" id="full-name" name="name" type="text" placeholder="Enter your name">
+      </label>
+      <label for="email">Email
+        <input id="email" name="email" type="email" placeholder="you@example.com">
+      </label>
+      <label for="message">Message
+        <textarea id="message" name="message" placeholder="Write a short message"></textarea>
+      </label>
+      <button type="submit">Submit demo form</button>
+    </form>
+  </div>
+</section>
+
+<section class="solution" id="q10">
+  <h2>10. Navigation Bar with Transitions and Hover Effects</h2>
+  <p class="intro">Five horizontal links have padding, borders, transitions, and an active state. Below 700px, the links stack vertically.</p>
+  <nav class="demo-navbar" aria-label="Example navigation">
+    <a class="active" href="#q1" aria-current="page">Home</a>
+    <a href="#q2">About</a><a href="#q4">Services</a><a href="#q7">Articles</a><a href="#q9">Contact</a>
+  </nav>
+  <div class="nav-footer">Centered footer text — Thank you for visiting.</div>
+</section>
+</main>
+<footer class="site-footer">Assignment 7 • HTML5 and CSS only</footer>
+</body>
+</html>
