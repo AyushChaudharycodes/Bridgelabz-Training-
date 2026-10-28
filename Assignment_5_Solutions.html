@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment 5 — All HTML & CSS Solutions</title>
+<style>
+/* This single-file edition contains all 10 assignment solutions.
+   Each question has its own section and its own scoped CSS rules.
+   No JavaScript or external frameworks are used. */
+:root { --ink:#1f2937; --muted:#64748b; --paper:#f4f7fb; --blue:#2563eb; --line:#dbe3ef; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.6 Arial, sans-serif; }
+a { color:inherit; }
+.site-intro { padding:2rem 1rem; text-align:center; color:white; background:linear-gradient(120deg,#172554,#2563eb); }
+.site-intro h1 { margin:0 0 .5rem; font-size:clamp(1.8rem,4vw,3rem); }
+.site-intro p { margin:.25rem auto; max-width:760px; }
+.assignment-nav { position:sticky; top:0; z-index:100; display:flex; flex-wrap:wrap; justify-content:center; gap:.35rem; padding:.75rem; background:#111827; }
+.assignment-nav a { padding:.4rem .7rem; color:white; text-decoration:none; border-radius:6px; font-size:.9rem; }
+.assignment-nav a:hover, .assignment-nav a:focus { background:#374151; }
+.solution { max-width:1100px; margin:2rem auto; padding:1.5rem; background:white; border:1px solid var(--line); border-radius:14px; box-shadow:0 5px 18px rgba(15,23,42,.06); }
+.solution > h2 { margin-top:0; padding-bottom:.6rem; border-bottom:2px solid var(--line); }
+.demo { overflow:hidden; border:1px solid #cbd5e1; border-radius:10px; }
+.note { color:var(--muted); font-size:.92rem; }
+footer.global-footer { padding:1.5rem; text-align:center; color:white; background:#111827; }
+
+/* Q1: Portfolio */
+.portfolio { min-height:620px; display:flex; flex-direction:column; background:#eff6ff; color:#172554; }
+.portfolio header { position:sticky; top:0; z-index:2; display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1rem 5%; background:#1e3a8a; color:white; }
+.portfolio header nav { display:flex; gap:1rem; flex-wrap:wrap; }
+.portfolio a { color:inherit; }
+.portfolio-main { flex:1; display:flex; align-items:center; justify-content:center; gap:2rem; padding:4vh 8%; }
+.portfolio-main img { width:min(34%,220px); aspect-ratio:1; object-fit:cover; border-radius:50%; border:5px solid white; box-shadow:0 8px 25px #1e3a8a30; }
+.portfolio-main p { max-width:520px; }
+.portfolio footer { margin-top:auto; padding:1rem; text-align:center; background:#dbeafe; }
+
+/* Q2: Informational destination page */
+.city-page { background:#f8fafc; }
+.city-page header { padding:2rem; text-align:center; color:white; background:linear-gradient(135deg,#0f766e,#164e63); }
+.city-page nav { padding:.8rem; text-align:center; background:#134e4a; color:white; }
+.city-page nav a { margin:0 .7rem; }
+.city-page main { width:100%; }
+.city-page section { min-height:230px; padding:2.5rem max(1.5rem,8%); border-bottom:5px solid white; background-attachment:fixed; background-position:center; background-size:cover; }
+.city-page .city-linear { color:white; background-image:linear-gradient(110deg,rgba(15,118,110,.92),rgba(8,47,73,.76)),url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1400&q=80'); }
+.city-page .city-radial { background-image:radial-gradient(circle at center,rgba(255,255,255,.98),rgba(204,251,241,.9)),url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1400&q=80'); }
+.city-page .city-plain { background:#e0f2fe; }
+.city-page h3 { font-size:2rem; font-weight:800; margin-top:0; }
+
+/* Q3: Team cards */
+.team-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.2rem; padding:1rem; }
+.team-card { padding:1.5rem; margin:.2rem; border:1px solid #cbd5e1; border-radius:16px; box-shadow:0 7px 20px rgba(15,23,42,.1); text-align:center; }
+.team-card .avatar { width:76px; height:76px; display:grid; place-items:center; margin:auto; border-radius:50%; background:#dbeafe; color:#1d4ed8; font-size:1.5rem; font-weight:bold; }
+.team-card.lead { background:#eff6ff; border:3px solid #2563eb; }
+@media(max-width:599px) { .team-grid { grid-template-columns:1fr; } }
+
+/* Q4: Article */
+.article-page { max-width:760px; margin:auto; padding:2rem; font-family:Georgia,serif; }
+.article-page h3 { font-size:2rem; line-height:1.2; }
+.article-page .byline { color:#64748b; font-family:Arial,sans-serif; }
+.article-page p { margin:1.2rem 0; text-align:justify; }
+.article-page p::first-letter { font-size:2.3em; color:#1d4ed8; font-weight:bold; float:left; line-height:.95; padding-right:.08em; }
+.article-page p::first-line { font-weight:bold; }
+.article-page mark { background:#fde68a; padding:.08em .2em; }
+.article-page blockquote { margin:1.5rem 0; padding:1rem 1.25rem; border-left:5px solid #2563eb; background:#eff6ff; color:#1e3a8a; }
+
+/* Q5: Pricing */
+.pricing-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; align-items:stretch; padding:1rem; }
+.price-card { display:flex; flex-direction:column; padding:1.5rem; border:2px solid #cbd5e1; border-radius:14px; text-align:center; transition:transform .25s ease,background-color .25s ease,box-shadow .25s ease; }
+.price-card:hover { transform:scale(1.035); background:#eff6ff; box-shadow:0 10px 24px #1e40af20; }
+.price-card.popular { border:3px solid #2563eb; background:#f5f8ff; }
+.price-card ul { padding-left:1.2rem; text-align:left; }
+.price-card .price { font-size:2rem; font-weight:bold; color:#1d4ed8; }
+.price-card a { display:inline-block; margin-top:auto; padding:.7rem 1rem; border-radius:7px; background:#1d4ed8; color:white; text-decoration:none; }
+@media(max-width:650px) { .pricing-grid { grid-template-columns:1fr; } }
+
+/* Q6: Photo gallery */
+.gallery-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; padding:1rem; }
+.gallery-item { position:relative; overflow:hidden; min-height:180px; border-radius:12px; box-shadow:0 6px 18px #0f172a25; }
+.gallery-item img { display:block; width:100%; height:220px; object-fit:cover; transition:transform .3s ease; }
+.gallery-item .caption { position:absolute; inset:auto 0 0; padding:1rem; color:white; background:linear-gradient(transparent,rgba(0,0,0,.85)); opacity:0; transition:opacity .3s ease; }
+.gallery-item:hover img, .gallery-item:focus-within img { transform:scale(1.1); }
+.gallery-item:hover .caption, .gallery-item:focus-within .caption { opacity:1; }
+@media(max-width:700px) { .gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:450px) { .gallery-grid { grid-template-columns:1fr; } }
+
+/* Q7: Contact form */
+.contact-demo { min-height:520px; display:grid; place-items:center; padding:1rem; background:linear-gradient(135deg,#dbeafe,#f5f3ff); }
+.contact-form { width:min(100%,520px); padding:2rem; border-radius:16px; background:white; box-shadow:0 12px 35px #1e293b20; }
+.contact-form label { display:block; margin:.8rem 0 .25rem; font-weight:bold; }
+.contact-form input, .contact-form textarea { width:100%; padding:.8rem; border:1px solid #cbd5e1; border-radius:8px; box-shadow:0 2px 5px #0f172a08; font:inherit; }
+.contact-form input:focus, .contact-form textarea:focus { outline:3px solid #bfdbfe; border-color:#2563eb; }
+.contact-form button { margin-top:1rem; padding:.8rem 1.2rem; border:0; border-radius:8px; background:#1d4ed8; color:white; font:inherit; cursor:pointer; }
+
+/* Q8: Dashboard */
+.dashboard { min-height:550px; background:#f1f5f9; }
+.dashboard header { position:sticky; top:0; z-index:3; padding:1rem 1.5rem; background:#0f172a; color:white; }
+.dashboard-layout { display:flex; min-height:490px; }
+.dashboard aside { width:220px; flex-shrink:0; padding:1.2rem; background:#1e293b; color:white; }
+.dashboard aside a { display:block; padding:.65rem; text-decoration:none; border-radius:6px; }
+.dashboard aside a:hover { background:#334155; }
+.dashboard-main { flex:1; padding:1.5rem; }
+.dashboard-boxes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.dashboard-box { min-height:150px; padding:1.2rem; border-radius:12px; background:white; box-shadow:0 5px 16px #0f172a15; }
+@media(max-width:600px) { .dashboard-layout { flex-direction:column; } .dashboard aside { width:100%; } .dashboard aside nav { display:flex; flex-wrap:wrap; gap:.4rem; } .dashboard-main { padding:1rem; } .dashboard-boxes { grid-template-columns:1fr; } }
+
+/* Q9: Magazine columns */
+.magazine { padding:2rem; background:#fff7ed; font-family:Georgia,serif; }
+.magazine h3 { column-span:all; margin-top:0; text-align:center; font-size:2rem; }
+.magazine .mag-copy { column-count:3; column-gap:2rem; column-rule:1px solid #d6bfa7; text-align:justify; }
+.magazine img { float:left; width:42%; max-width:230px; margin:0 1rem .5rem 0; border-radius:8px; }
+@media(max-width:700px) { .magazine .mag-copy { column-count:2; } }
+@media(max-width:480px) { .magazine { padding:1rem; } .magazine .mag-copy { column-count:1; } .magazine img { width:100%; max-width:none; float:none; margin:0 0 1rem; } }
+
+/* Q10: Complete layout / Box Model */
+.complete-page { color:#1f2937; }
+.complete-page header { position:sticky; top:0; z-index:5; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding:1rem 5%; background:rgba(15,23,42,.96); color:white; }
+.complete-page header nav { display:flex; flex-wrap:wrap; gap:1rem; }
+.complete-page header a { color:white; text-decoration:none; }
+.complete-hero { position:relative; min-height:320px; display:grid; place-items:center; padding:2rem; text-align:center; color:white; background:linear-gradient(rgba(15,23,42,.55),rgba(15,23,42,.55)),url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80') center/cover; }
+.complete-hero h3 { margin:0; font-size:clamp(2rem,5vw,3.5rem); }
+.complete-about { display:flex; align-items:center; gap:2rem; padding:2rem 6%; }
+.complete-about > * { flex:1; min-width:0; }
+.complete-about img { width:100%; border:5px solid white; outline:2px solid #93c5fd; border-radius:10px; }
+.complete-services { padding:2rem 6%; background:#eff6ff; }
+.complete-service-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.complete-service { position:relative; padding:1.5rem; border:1px solid #bfdbfe; border-radius:12px; background:rgba(255,255,255,.9); box-shadow:0 6px 16px #1e3a8a18; }
+.complete-service:first-child { top:5px; }
+.complete-contact { padding:2rem; background:linear-gradient(120deg,#e0f2fe,#eef2ff); }
+.complete-contact form { max-width:500px; margin:auto; padding:1.5rem; border:1px solid #cbd5e1; border-radius:12px; background:white; }
+.complete-contact input, .complete-contact textarea { width:100%; margin:.4rem 0 .8rem; padding:.7rem; border:1px solid #cbd5e1; border-radius:6px; font:inherit; }
+.complete-contact button { padding:.7rem 1rem; border:0; border-radius:6px; background:#1d4ed8; color:white; }
+.complete-page footer { padding:1.2rem; text-align:center; background:#0f172a; color:white; }
+.fixed-help { position:fixed; right:14px; bottom:14px; z-index:10; padding:.6rem .8rem; border-radius:30px; background:#1d4ed8; color:white; box-shadow:0 4px 12px #0f172a40; font-size:.85rem; }
+@media(max-width:650px) { .portfolio-main, .complete-about { flex-direction:column; text-align:center; } .portfolio-main img { width:180px; max-width:70%; } .complete-service-grid { grid-template-columns:1fr; } .complete-hero { min-height:260px; } }
+</style>
+</head>
+<body>
+<div class="site-intro">
+  <h1>Assignment 5 — All Solutions</h1>
+  <p>Ten HTML and CSS examples combined into one normal HTML file for easy viewing and submission.</p>
+  <p class="note" style="color:#dbeafe">Save as <strong>Assignment_5_All_Solutions.html</strong> and open it in a browser.</p>
+</div>
+<nav class="assignment-nav" aria-label="Assignment questions">
+  <a href="#q1">Q1 Portfolio</a><a href="#q2">Q2 City</a><a href="#q3">Q3 Team</a><a href="#q4">Q4 Article</a><a href="#q5">Q5 Pricing</a><a href="#q6">Q6 Gallery</a><a href="#q7">Q7 Contact</a><a href="#q8">Q8 Dashboard</a><a href="#q9">Q9 Magazine</a><a href="#q10">Q10 Complete</a>
+</nav>
+
+<section class="solution" id="q1">
+<h2>Question 1 — Personal Portfolio Homepage</h2>
+<div class="demo portfolio">
+  <header><strong>Alex Morgan</strong><nav aria-label="Portfolio navigation"><a href="#q1">Home</a><a href="#portfolio-about">About</a><a href="#portfolio-contact">Contact</a></nav></header>
+  <main class="portfolio-main" id="portfolio-about">
+    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Portrait representing the portfolio owner">
+    <div><h3>Hello, I'm Alex!</h3><p>I am a creative web design student who enjoys building accessible, useful, and attractive digital experiences. I am learning semantic HTML, responsive layouts, and modern CSS.</p><p><strong>Skills:</strong> HTML · CSS · Design · Teamwork</p></div>
+  </main>
+  <footer id="portfolio-contact">Contact: alex@example.com · © 2026 Alex Morgan</footer>
+</div>
+</section>
+
+<section class="solution" id="q2">
+<h2>Question 2 — Informational Webpage: Discover a City</h2>
+<div class="demo city-page">
+<header><h3>Discover the City</h3><p>A quick guide to urban culture, landmarks, and green spaces.</p></header>
+<nav aria-label="City sections"><a href="#city-landmarks">Landmarks</a><a href="#city-culture">Culture</a><a href="#city-parks">Parks</a></nav>
+<main>
+<section class="city-linear" id="city-landmarks"><h3>Iconic Landmarks</h3><p>Explore remarkable buildings, lively public squares, and streets that tell the story of a city's past and present.</p></section>
+<section class="city-radial" id="city-culture"><h3>Arts and Culture</h3><p>Visit galleries, discover local food, listen to live music, and enjoy festivals that bring communities together.</p></section>
+<section class="city-plain" id="city-parks"><h3>Green Spaces</h3><p>City parks offer places to walk, relax, meet friends, and take a break from the busy streets.</p></section>
+</main><footer style="padding:1rem;text-align:center">Travel thoughtfully · Leave places better than you found them.</footer>
+</div>
+<p class="note">The first two sections use fixed background attachment and demonstrate linear and radial gradients.</p>
+</section>
+
+<section class="solution" id="q3">
+<h2>Question 3 — Three-Column Team Members</h2>
+<div class="demo"><div class="team-grid">
+<article class="team-card"><div class="avatar" aria-hidden="true">JD</div><h3>Jordan Davis</h3><strong>Designer</strong><p>Creates clear, friendly interfaces and keeps the user experience at the center of each project.</p></article>
+<article class="team-card lead"><div class="avatar" aria-hidden="true">AM</div><h3>Alex Morgan</h3><strong>Team Lead</strong><p>Coordinates tasks, supports the team, and helps keep projects organized and on schedule.</p></article>
+<article class="team-card"><div class="avatar" aria-hidden="true">SK</div><h3>Sam Kim</h3><strong>Developer</strong><p>Builds responsive pages with semantic HTML and clean, maintainable CSS.</p></article>
+</div></div>
+<p class="note">Resize the browser below 600px to see the cards stack into one column.</p>
+</section>
+
+<section class="solution" id="q4">
+<h2>Question 4 — Long Article Webpage</h2>
+<div class="demo article-page">
+<header><h3>Why Green Spaces Matter in Modern Cities</h3><p class="byline">By Taylor Reed · October 28, 2026</p></header>
+<article>
+<p><mark>Public parks</mark> make cities more welcoming by giving residents places to rest, exercise, and spend time together. Even a small green space can provide a welcome pause from busy streets.</p>
+<p>Trees and plants can improve the experience of walking through a neighborhood. Shade helps make outdoor routes more comfortable, while planted areas bring seasonal color and variety to the urban landscape.</p>
+<p>Green spaces also create opportunities for community life. People can meet for a picnic, join a local event, read quietly, or enjoy time outside with friends and family.</p>
+<blockquote>“A good public space gives everyone a reason to step outside, slow down, and feel part of the community.”</blockquote>
+<p>Well-designed parks need thoughtful planning and regular care. Accessible paths, seating, lighting, and clear signs help people of different ages and abilities use these spaces comfortably.</p>
+<p>Communities can help protect shared green areas by keeping them clean, respecting plants and wildlife, and supporting local improvement projects. Small, consistent actions can make public spaces better for everyone.</p>
+</article>
+</div>
+<p class="note">CSS demonstrates paragraph margins, ::first-letter, ::first-line, mark styling, and a highlighted blockquote.</p>
+</section>
+
+<section class="solution" id="q5">
+<h2>Question 5 — Pricing Table</h2>
+<div class="demo"><div class="pricing-grid">
+<article class="price-card"><h3>Basic</h3><p>For personal projects</p><div class="price">₹199<span style="font-size:.9rem">/mo</span></div><ul><li>One project</li><li>Core features</li><li>Email support</li></ul><a href="#q7">Choose Basic</a></article>
+<article class="price-card popular"><p><strong>Most Popular</strong></p><h3>Standard</h3><p>For growing teams</p><div class="price">₹499<span style="font-size:.9rem">/mo</span></div><ul><li>Five projects</li><li>All core features</li><li>Priority support</li></ul><a href="#q7">Choose Standard</a></article>
+<article class="price-card"><h3>Premium</h3><p>For advanced needs</p><div class="price">₹999<span style="font-size:.9rem">/mo</span></div><ul><li>Unlimited projects</li><li>Advanced features</li><li>Dedicated support</li></ul><a href="#q7">Choose Premium</a></article>
+</div></div>
+</section>
+
+<section class="solution" id="q6">
+<h2>Question 6 — CSS-Only Photo Gallery</h2>
+<div class="demo"><div class="gallery-grid">
+<figure class="gallery-item"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80" alt="Sunlight over a mountain landscape"><figcaption class="caption">Mountain Escape</figcaption></figure>
+<figure class="gallery-item"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=700&q=80" alt="Lake surrounded by mountains"><figcaption class="caption">Quiet Lake</figcaption></figure>
+<figure class="gallery-item"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=700&q=80" alt="Sunbeams through a forest"><figcaption class="caption">Forest Trail</figcaption></figure>
+<figure class="gallery-item"><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=700&q=80" alt="Ocean waves near the shore"><figcaption class="caption">Ocean Waves</figcaption></figure>
+<figure class="gallery-item"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=700&q=80" alt="Starry sky above a mountain"><figcaption class="caption">Starry Night</figcaption></figure>
+<figure class="gallery-item"><img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=700&q=80" alt="Sunrise over rolling hills"><figcaption class="caption">Golden Sunrise</figcaption></figure>
+</div></div>
+<p class="note">Hover over an image to reveal its caption and enlarge it slightly. Images load from Unsplash, so an internet connection is needed for them.</p>
+</section>
+
+<section class="solution" id="q7">
+<h2>Question 7 — Contact Page Form</h2>
+<div class="demo contact-demo">
+<form class="contact-form" action="mailto:hello@example.com" method="post" enctype="text/plain">
+<h3>Get in Touch</h3><p>Send a message and we will get back to you.</p>
+<label for="contact-name">Name</label><input id="contact-name" name="name" type="text" placeholder="Your name" required>
+<label for="contact-email">Email</label><input id="contact-email" name="email" type="email" placeholder="you@example.com" required>
+<label for="contact-subject">Subject</label><input id="contact-subject" name="subject" type="text" placeholder="What is this about?" required>
+<label for="contact-message">Message</label><textarea id="contact-message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+<button type="submit">Send Message</button>
+</form>
+</div>
+<p class="note">This is a front-end example. The mailto form relies on the visitor having a configured email application; a real website needs a server-side form handler.</p>
+</section>
+
+<section class="solution" id="q8">
+<h2>Question 8 — Dashboard Layout</h2>
+<div class="demo dashboard">
+<header><strong>Workspace Dashboard</strong> <span style="float:right">Welcome back!</span></header>
+<div class="dashboard-layout">
+<aside><h3>Navigation</h3><nav><a href="#dashboard-overview">Overview</a><a href="#dashboard-projects">Projects</a><a href="#dashboard-reports">Reports</a><a href="#dashboard-settings">Settings</a></nav></aside>
+<main class="dashboard-main" id="dashboard-overview"><h3>Overview</h3><div class="dashboard-boxes">
+<article class="dashboard-box" id="dashboard-projects"><h4>Projects</h4><p><strong>12 active</strong></p><p>Review current work and project milestones.</p></article>
+<article class="dashboard-box" id="dashboard-reports"><h4>Performance</h4><p><strong>86% complete</strong></p><p>Track progress toward this month's goals.</p></article>
+<article class="dashboard-box"><h4>Recent Activity</h4><p>Three tasks were updated this week.</p></article>
+<article class="dashboard-box" id="dashboard-settings"><h4>Quick Settings</h4><p>Manage preferences and workspace details.</p></article>
+</div></main>
+</div>
+</div>
+</section>
+
+<section class="solution" id="q9">
+<h2>Question 9 — Newspaper / Magazine Columns</h2>
+<div class="demo magazine">
+<h3>The Weekend Journal: Small Changes, Better Cities</h3>
+<div class="mag-copy">
+<img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=600&q=80" alt="City buildings and a tree-lined street">
+<p>Cities are always changing. Streets gain new shops, public spaces welcome new visitors, and neighborhoods develop their own character. Thoughtful design can help these changes benefit the people who live and work nearby.</p>
+<p>Walkable routes make everyday trips simpler. Wide sidewalks, safe crossings, clear signs, and comfortable places to rest encourage people to explore their surroundings without always needing a car.</p>
+<p>Public transport is another important part of a connected city. Reliable services help residents reach schools, jobs, parks, and cultural destinations while reducing pressure on crowded roads.</p>
+<p>Local businesses add personality to streets. Cafés, markets, bookshops, and small studios give people reasons to gather and help neighborhood centers feel lively throughout the day.</p>
+<p>Green spaces make urban areas more pleasant, too. Trees, gardens, and pocket parks provide shade and places to pause, while community planting projects give neighbors a shared goal.</p>
+<p>Improving a city does not always require a grand plan. Listening to residents, repairing a crossing, adding a bench, or planting a tree can all make a meaningful difference over time.</p>
+</div>
+</div>
+</section>
+
+<section class="solution" id="q10">
+<h2>Question 10 — Complete Webpage: Box Model and Positioning</h2>
+<div class="demo complete-page">
+<header><strong>BrightSpace</strong><nav aria-label="Main navigation"><a href="#complete-home">Home</a><a href="#complete-about">About</a><a href="#complete-services">Services</a><a href="#complete-contact">Contact</a></nav></header>
+<section class="complete-hero" id="complete-home"><div><h3>Welcome to BrightSpace</h3><p>Ideas, design, and digital experiences built around you.</p></div></section>
+<section class="complete-about" id="complete-about"><div><h3>About Us</h3><p>BrightSpace is a sample creative studio focused on making digital experiences clear, accessible, and useful. We combine thoughtful planning with responsive design to help ideas become practical web experiences.</p><p>Our approach values collaboration, simple communication, and attention to detail.</p></div><div><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80" alt="Bright and modern collaborative workspace"></div></section>
+<section class="complete-services" id="complete-services"><h3>Our Services</h3><div class="complete-service-grid">
+<article class="complete-service"><h4>Web Design</h4><p>Clean layouts that adapt to different screen sizes.</p></article>
+<article class="complete-service"><h4>Development</h4><p>Semantic HTML and maintainable CSS for reliable pages.</p></article>
+<article class="complete-service"><h4>Consulting</h4><p>Practical guidance to plan and improve your online presence.</p></article>
+</div></section>
+<section class="complete-contact" id="complete-contact"><h3 style="text-align:center">Contact Us</h3><form action="mailto:hello@example.com" method="post" enctype="text/plain"><label for="complete-name">Name</label><input id="complete-name" name="name" required><label for="complete-email">Email</label><input id="complete-email" name="email" type="email" required><label for="complete-message">Message</label><textarea id="complete-message" name="message" rows="4" required></textarea><button type="submit">Submit</button></form></section>
+<footer>© 2026 BrightSpace. All rights reserved.</footer>
+</div>
+</section>
+
+<footer class="global-footer">Assignment 5 · HTML and CSS only · All 10 solutions in one file</footer>
+<div class="fixed-help">CSS practice</div>
+</body>
+</html>
