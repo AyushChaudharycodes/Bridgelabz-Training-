@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment 9 — All Solutions</title>
+<style>
+/* Global page styling */
+* { box-sizing: border-box; }
+:root { --navy:#19243b; --blue:#3157d5; --ink:#26334b; --muted:#5c6980; --line:#dbe2ee; }
+body { margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--ink); background:#f3f6fc; line-height:1.6; }
+.site-header { padding:28px 5%; background:var(--navy); color:#fff; }
+.site-header h1 { margin:0 0 6px; font-size:clamp(1.7rem,4vw,2.5rem); }
+.site-header p { margin:0; color:#dce5ff; }
+main { width:min(1180px,92%); margin:28px auto 48px; }
+.contents { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:25px; }
+.contents a { text-decoration:none; color:#2444aa; background:#e6ecff; border:1px solid #cbd7ff; border-radius:20px; padding:6px 11px; font-size:.9rem; }
+.solution { background:#fff; border:1px solid var(--line); border-radius:15px; padding:23px; margin-bottom:23px; box-shadow:0 5px 17px rgba(24,36,60,.05); }
+.solution h2 { margin:0 0 8px; line-height:1.3; }
+.intro { margin:0 0 17px; color:var(--muted); }
+.demo { background:#f8faff; border:1px dashed #cbd5e5; border-radius:12px; padding:18px; }
+.note { color:var(--muted); font-size:.92rem; }
+.site-footer { text-align:center; padding:18px; color:#e5ebff; background:var(--navy); }
+
+/* Q1: Responsive image filter gallery */
+.filter-gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:18px; }
+.filter-gallery figure { margin:0; overflow:hidden; border-radius:12px; background:white; box-shadow:0 6px 16px rgba(24,36,60,.12); }
+.filter-gallery .scene { height:160px; display:grid; place-items:center; font-size:3rem; transition:filter .4s ease, transform .4s ease; }
+.filter-gallery figure:hover .scene { filter:none; transform:scale(1.03); }
+.filter-gallery figcaption { padding:10px; text-align:center; font-weight:bold; }
+.blur { filter:blur(2px); }.grayscale { filter:grayscale(1); }.sepia { filter:sepia(1); }.brightness { filter:brightness(.65); }.contrast { filter:contrast(.5); }.hue { filter:hue-rotate(130deg); }
+.scene-a { background:linear-gradient(135deg,#a9d6ff,#e6c7ff); }.scene-b { background:linear-gradient(135deg,#f6c6a8,#f5dca7); }.scene-c { background:linear-gradient(135deg,#b8ebd3,#a6d2f4); }.scene-d { background:linear-gradient(135deg,#e2c4ff,#f3b8d8); }.scene-e { background:linear-gradient(135deg,#b4d8ee,#d5f0c2); }.scene-f { background:linear-gradient(135deg,#f7d98b,#f4b4a4); }
+
+/* Q2: Responsive Flexbox homepage */
+.home-demo { display:flex; flex-direction:column; gap:18px; }
+.homebar { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:15px 18px; color:white; background:#19243b; border-radius:10px; }
+.homebar nav { display:flex; flex-wrap:wrap; gap:15px; }.homebar a { color:#e5ebff; text-decoration:none; }.homebar a:hover { text-decoration:underline; }
+.features { display:flex; gap:16px; }
+.feature { flex:1; padding:22px; background:#e6ecff; border-radius:12px; transition:transform .3s ease, background .3s ease; }
+.feature:hover { transform:scale(1.035); background:#d7e2ff; }
+.home-foot { text-align:center; padding:12px; background:#e8edf7; border-radius:8px; }
+
+/* Q3: Cards at desktop, tablet, mobile breakpoints */
+.responsive-cards { display:flex; flex-wrap:wrap; gap:18px; }
+.responsive-card { flex:1 1 calc(25% - 18px); min-width:0; padding:22px; border-radius:12px; background:#e4edff; transition:background .25s ease; }
+.responsive-card:hover { background:#cce8dc; }
+@media (max-width:900px) { .responsive-card { flex-basis:calc(50% - 18px); } }
+@media (max-width:600px) { .responsive-card { flex-basis:100%; } }
+
+/* Q4: Responsive typography */
+.type-demo { text-align:center; padding:clamp(18px,4vw,45px); background:linear-gradient(135deg,#e7efff,#fff1e8); border-radius:12px; }
+.type-demo h1 { font-size:clamp(1.5rem,4vw,3rem); margin:0 0 16px; line-height:1.2; }
+.type-demo p { font-size:clamp(1rem,2vw,1.5rem); margin:0 auto; max-width:760px; }
+@media (max-width:700px) { .type-demo { padding:18px; }.type-demo h1 { line-height:1.25; }.type-demo p { line-height:1.8; } }
+
+/* Q5: Filter cards with entrance animation */
+.profile-row { display:flex; gap:18px; }
+.profile-card { flex:1; padding:20px; text-align:center; border-radius:13px; background:#fff; box-shadow:0 6px 18px rgba(24,36,60,.1); animation:fadeIn .8s ease both; }
+.profile-card:nth-child(2) { animation-delay:.15s; }.profile-card:nth-child(3) { animation-delay:.3s; }
+.profile-art { display:grid; place-items:center; height:120px; border-radius:10px; font-size:3rem; margin-bottom:12px; transition:filter .35s ease; }
+.profile-card:nth-child(1) .profile-art { background:linear-gradient(135deg,#b9d8ff,#d6c5ff); filter:grayscale(1); }
+.profile-card:nth-child(2) .profile-art { background:linear-gradient(135deg,#f9d6ac,#efb8c5); filter:sepia(.9); }
+.profile-card:nth-child(3) .profile-art { background:linear-gradient(135deg,#b8ebd3,#c4d6ff); filter:contrast(.55); }
+.profile-card:hover { transform:translateY(-10px); }
+.profile-card:hover .profile-art { filter:none; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
+
+/* Q6: Responsive CSS cheat sheet */
+.cheat-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.cheat-item { padding:18px; background:white; border:1px solid var(--line); border-radius:10px; transition:transform .25s ease, background .25s ease; }
+.cheat-item:hover { transform:translateY(-4px); background:#eaf0ff; }
+.cheat-item h3 { margin:0 0 8px; color:#2444aa; }
+.cheat-item code { white-space:normal; overflow-wrap:anywhere; color:#7a3d9a; }
+
+/* Q7: Combined responsive demo */
+.combined-layout { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:16px; }
+.combined-section { min-width:0; padding:18px; background:white; border:1px solid var(--line); border-radius:12px; animation:fadeIn .7s ease both; }
+.combined-section h3 { margin-top:0; }.combined-section a { color:#3157d5; }
+.mini-gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+.mini-gallery span { display:grid; place-items:center; min-height:70px; border-radius:8px; background:linear-gradient(135deg,#b8d9ff,#e6c7ff); font-size:1.8rem; transition:transform .25s ease; }
+.mini-gallery span:hover { transform:scale(1.06); }
+.combined-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; padding:14px 18px; background:#19243b; color:white; border-radius:10px; margin-bottom:16px; }
+.combined-header a { color:#e5ebff; text-decoration:none; }
+
+/* Q8: Filter comparison */
+.comparison-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.comparison-figure { margin:0; padding:12px; background:white; border-radius:12px; box-shadow:0 5px 14px rgba(24,36,60,.1); }
+.comparison-art { display:grid; place-items:center; height:190px; border-radius:9px; font-size:3.5rem; background:linear-gradient(135deg,#b7e0ff,#f7d1a8); }
+.comparison-figure.filtered .comparison-art { filter:brightness(.55) contrast(1.3); transition:filter .4s ease; }
+.comparison-figure.filtered:hover .comparison-art { filter:none; }
+.comparison-figure figcaption { text-align:center; padding:10px 4px 0; font-weight:bold; }
+
+/* Q9: Responsive principles */
+.principles { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.principle { padding:20px; border-radius:12px; background:#e9efff; transition:background .3s ease,color .3s ease,transform .3s ease; }
+.principle:hover { background:linear-gradient(135deg,#3157d5,#7b59b8); color:white; transform:translateY(-4px); }
+.principle code { display:block; margin-top:10px; overflow-wrap:anywhere; }
+
+/* Q10: Dashboard */
+.dashboard { display:grid; grid-template-columns:220px minmax(0,1fr); gap:16px; animation:fadeIn .7s ease both; }
+.dash-header { grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:16px 20px; color:white; background:#19243b; border-radius:10px; }
+.sidebar { padding:18px; border-radius:12px; background:#e3eaff; }
+.sidebar a { display:block; padding:7px 0; color:#2444aa; text-decoration:none; }
+.dash-content { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.dash-card { padding:18px; background:white; border:1px solid var(--line); border-radius:12px; transition:transform .25s ease,box-shadow .25s ease; }
+.dash-card:hover { transform:scale(1.025); box-shadow:0 10px 22px rgba(24,36,60,.14); }
+.dash-card h3 { margin-top:0; }
+@media (max-width:750px) { .features { flex-direction:column; }.profile-row { flex-direction:column; }.combined-layout { grid-template-columns:1fr; }.dashboard { grid-template-columns:1fr; }.dash-header { grid-column:auto; }.sidebar { order:0; }.dash-content { grid-template-columns:1fr; } }
+@media (max-width:700px) { .combined-layout { grid-template-columns:1fr; }.comparison-row { grid-template-columns:1fr; }.cheat-grid { grid-template-columns:1fr; }.principles { grid-template-columns:1fr; } }
+@media (max-width:600px) { .filter-gallery { grid-template-columns:1fr; }.solution { padding:17px; }.homebar { align-items:flex-start; flex-direction:column; } }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <h1>Assignment 9 — Responsive CSS Solutions</h1>
+  <p>All 10 questions in one standalone HTML file, with embedded CSS and no JavaScript or external frameworks.</p>
+</header>
+<main>
+<nav class="contents" aria-label="Assignment questions">
+  <a href="#q1">Q1 Image Filters</a><a href="#q2">Q2 Responsive Layout</a><a href="#q3">Q3 Media Query Cards</a><a href="#q4">Q4 Typography</a><a href="#q5">Q5 Filter Cards</a><a href="#q6">Q6 Cheat Sheet</a><a href="#q7">Q7 Combined Demo</a><a href="#q8">Q8 Comparison</a><a href="#q9">Q9 Principles</a><a href="#q10">Q10 Dashboard</a>
+</nav>
+
+<section class="solution" id="q1">
+<h2>Q1. Responsive Image Filter Gallery</h2>
+<p class="intro">Six image-style panels demonstrate blur, grayscale, sepia, brightness, contrast, and hue-rotate. Hover to remove the filter.</p>
+<div class="filter-gallery">
+<figure><div class="scene scene-a blur" role="img" aria-label="Blurred mountain scene">🏔️</div><figcaption>Blur filter</figcaption></figure>
+<figure><div class="scene scene-b grayscale" role="img" aria-label="Grayscale sunrise scene">🌅</div><figcaption>Grayscale filter</figcaption></figure>
+<figure><div class="scene scene-c sepia" role="img" aria-label="Sepia nature scene">🌿</div><figcaption>Sepia filter</figcaption></figure>
+<figure><div class="scene scene-d brightness" role="img" aria-label="Darkened flower scene">🌸</div><figcaption>Brightness filter</figcaption></figure>
+<figure><div class="scene scene-e contrast" role="img" aria-label="Low contrast ocean scene">🌊</div><figcaption>Contrast filter</figcaption></figure>
+<figure><div class="scene scene-f hue" role="img" aria-label="Hue rotated evening scene">🌇</div><figcaption>Hue-rotate filter</figcaption></figure>
+</div>
+</section>
+
+<section class="solution" id="q2">
+<h2>Q2. Responsive Web Design Layout</h2>
+<p class="intro">Flexbox header with logo and navigation, three feature boxes, and a centered footer. Features stack below 750px.</p>
+<div class="demo home-demo">
+<header class="homebar"><strong>FlexHome</strong><nav aria-label="Homepage navigation"><a href="#q2">Home</a><a href="#q3">Features</a><a href="#q10">Dashboard</a></nav></header>
+<div class="features"><article class="feature"><h3>Fast</h3><p>Simple layouts that adapt to the available space.</p></article><article class="feature"><h3>Flexible</h3><p>Flexbox distributes elements neatly across a row.</p></article><article class="feature"><h3>Responsive</h3><p>Media queries adjust the layout for smaller screens.</p></article></div>
+<footer class="home-foot">Centered homepage footer</footer>
+</div>
+</section>
+
+<section class="solution" id="q3">
+<h2>Q3. Responsive Cards with Media Queries</h2>
+<p class="intro">Four cards display in four columns on desktop, two columns at 900px and below, and one column at 600px and below.</p>
+<div class="demo responsive-cards">
+<article class="responsive-card"><h3>Card One</h3><p>Equal spacing and padding.</p></article>
+<article class="responsive-card"><h3>Card Two</h3><p>Hover to change the background.</p></article>
+<article class="responsive-card"><h3>Card Three</h3><p>Flexbox wraps at breakpoints.</p></article>
+<article class="responsive-card"><h3>Card Four</h3><p>Responsive on desktop, tablet, and mobile.</p></article>
+</div>
+</section>
+
+<section class="solution" id="q4">
+<h2>Q4. Responsive Typography</h2>
+<p class="intro">The heading and paragraph use the requested clamp() formulas to scale with the viewport.</p>
+<div class="type-demo"><h1>Design for Every Screen</h1><p>Responsive typography keeps text readable on phones, tablets, and large displays. Relative units and clamp() provide flexible sizes with sensible minimum and maximum limits.</p></div>
+</section>
+
+<section class="solution" id="q5">
+<h2>Q5. Filter Cards with Animation</h2>
+<p class="intro">Three profile cards fade in on page load. Each image-style panel starts with a different filter and clears on hover while the card lifts.</p>
+<div class="demo profile-row">
+<article class="profile-card"><div class="profile-art" role="img" aria-label="Profile illustration">🧑‍🎨</div><h3>Alex Morgan</h3><p>Grayscale image filter.</p></article>
+<article class="profile-card"><div class="profile-art" role="img" aria-label="Profile illustration">👩‍💻</div><h3>Jordan Lee</h3><p>Sepia image filter.</p></article>
+<article class="profile-card"><div class="profile-art" role="img" aria-label="Profile illustration">🧑‍🚀</div><h3>Sam Taylor</h3><p>Contrast image filter.</p></article>
+</div>
+</section>
+
+<section class="solution" id="q6">
+<h2>Q6. Responsive CSS Cheat Sheet</h2>
+<p class="intro">Key concepts in responsive CSS, arranged in a Grid and stacked below 700px.</p>
+<div class="cheat-grid">
+<article class="cheat-item"><h3>Filters</h3><p>Apply visual effects to images.</p><code>filter: grayscale(1);</code></article>
+<article class="cheat-item"><h3>Media Queries</h3><p>Apply styles at selected viewport widths.</p><code>@media (max-width:700px) { ... }</code></article>
+<article class="cheat-item"><h3>Responsive Design</h3><p>Make content adapt to different screen sizes.</p><code>width: 100%; max-width: 900px;</code></article>
+<article class="cheat-item"><h3>Typography</h3><p>Scale text fluidly with viewport size.</p><code>font-size: clamp(1rem, 2vw, 1.5rem);</code></article>
+<article class="cheat-item"><h3>CSS Grid</h3><p>Create adaptable columns and rows.</p><code>grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</code></article>
+<article class="cheat-item"><h3>Flexbox</h3><p>Align items in a row or column.</p><code>display: flex; gap: 1rem;</code></article>
+</div>
+</section>
+
+<section class="solution" id="q7">
+<h2>Q7. Combined Responsive Web Demo</h2>
+<p class="intro">Header and navigation use Flexbox; Grid lays out a gallery, explanation, and cheat sheet preview. Sections stack below 700px.</p>
+<div class="demo">
+<header class="combined-header"><strong>Responsive Lab</strong><nav><a href="#q1">Gallery</a> &nbsp; <a href="#q6">Cheat Sheet</a> &nbsp; <a href="#q9">Principles</a></nav></header>
+<div class="combined-layout">
+<section class="combined-section"><h3>Image Gallery</h3><div class="mini-gallery"><span>🏔️</span><span>🌅</span><span>🌿</span><span>🌊</span></div></section>
+<section class="combined-section"><h3>Responsive Design</h3><p>Layouts adapt to available screen width using flexible grids, fluid sizing, and media queries.</p><p class="note">Hover over the gallery tiles for a subtle transition.</p></section>
+<section class="combined-section"><h3>Cheat Sheet Preview</h3><p><strong>Grid:</strong> columns and rows.</p><p><strong>Flexbox:</strong> alignment and spacing.</p><p><strong>clamp():</strong> fluid text sizes.</p></section>
+</div>
+</div>
+</section>
+
+<section class="solution" id="q8">
+<h2>Q8. Filter Comparison Layout</h2>
+<p class="intro">Compare the original panel with a filtered version. Hover over the right panel to smoothly remove the filter; panels stack below 700px.</p>
+<div class="comparison-row">
+<figure class="comparison-figure"><div class="comparison-art" role="img" aria-label="Original landscape illustration">🏞️</div><figcaption>Before — Original</figcaption></figure>
+<figure class="comparison-figure filtered"><div class="comparison-art" role="img" aria-label="Filtered landscape illustration">🏞️</div><figcaption>After — Brightness and contrast filter</figcaption></figure>
+</div>
+</section>
+
+<section class="solution" id="q9">
+<h2>Q9. Responsive Design Principles Summary</h2>
+<p class="intro">Three principle boxes include short definitions and CSS examples. Hover to see a gradient and text-color change.</p>
+<div class="principles">
+<article class="principle"><h3>Fluid Layouts</h3><p>Use flexible widths that adjust to the viewport.</p><code>width: 100%; max-width: 1100px;</code></article>
+<article class="principle"><h3>Flexible Media</h3><p>Prevent images and media from overflowing their containers.</p><code>img { max-width: 100%; height: auto; }</code></article>
+<article class="principle"><h3>Breakpoints</h3><p>Change the layout when the viewport reaches a chosen size.</p><code>@media (max-width: 600px) { ... }</code></article>
+</div>
+</section>
+
+<section class="solution" id="q10">
+<h2>Q10. Responsive Dashboard Summary</h2>
+<p class="intro">CSS Grid organizes the header, sidebar, and main content. Below 750px, the sidebar moves to the top and cards stack.</p>
+<div class="dashboard">
+<header class="dash-header"><strong>CSS Dashboard</strong><span>Responsive Overview</span></header>
+<aside class="sidebar"><h3>Menu</h3><a href="#q1">Filters</a><a href="#q4">Typography</a><a href="#q6">Media Queries</a><a href="#q6">Cheat Sheet Links</a></aside>
+<div class="dash-content">
+<article class="dash-card"><h3>Filters</h3><p>Use CSS filter functions for visual effects.</p><a href="#q1">View example</a></article>
+<article class="dash-card"><h3>Typography</h3><p>Use clamp() for fluid and accessible sizing.</p><a href="#q4">View example</a></article>
+<article class="dash-card"><h3>Media Queries</h3><p>Adapt columns and spacing at breakpoints.</p><a href="#q3">View example</a></article>
+<article class="dash-card"><h3>Cheat Sheet Links</h3><p>Review common responsive CSS techniques.</p><a href="#q6">Open cheat sheet</a></article>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">Assignment 9 • Responsive HTML5 and CSS</footer>
+</body>
+</html>
